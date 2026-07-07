@@ -1,4 +1,4 @@
-﻿CREATE TABLE IF NOT EXISTS hotel_bookings (
+CREATE TABLE IF NOT EXISTS hotel_bookings (
   id UUID PRIMARY KEY,
   org_id UUID NOT NULL,
   hotel_id VARCHAR(100) NOT NULL,
@@ -9,11 +9,13 @@
   status VARCHAR(50) NOT NULL,
   created_at TIMESTAMP NOT NULL
 );
+
 CREATE TABLE IF NOT EXISTS booking_events (
   id BIGSERIAL PRIMARY KEY,
-  booking_id UUID NOT NULL,
+  booking_id UUID NOT NULL REFERENCES hotel_bookings(id) ON DELETE CASCADE,
   event_type VARCHAR(100) NOT NULL,
   payload JSONB,
   created_at TIMESTAMP NOT NULL
 );
+
 CREATE INDEX idx_bookings_city_created_at_org_status ON hotel_bookings (city, created_at, org_id, status);

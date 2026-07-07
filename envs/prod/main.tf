@@ -3,14 +3,14 @@ provider "aws" { region = "us-east-1" }
 module "network" {
   source   = "../../modules/network"
   vpc_cidr = var.vpc_cidr
-  env      = "dev"
+  env      = "prod"
 }
 
 module "ecs" {
   source           = "../../modules/ecs"
   vpc_id           = module.network.vpc_id
   public_subnet_id = module.network.public_subnet_id
-  env              = "dev"
+  env              = "prod"
 }
 
 module "rds" {
@@ -20,5 +20,5 @@ module "rds" {
   instance_class          = var.instance_class
   backup_retention_period = var.backup_retention_period
   deletion_protection     = var.deletion_protection
-  env                     = "dev"
+  env                     = "prod"
 }
