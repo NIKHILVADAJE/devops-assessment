@@ -1,0 +1,10 @@
+# Ignore Terraform internal directories
+.terraform/
+*.tfstate
+*.tfstate.backup
+.terraform.lock.hcl
+
+# Ignore Docker database storage and backups
+postgres_data/
+backups/
+*.sql
